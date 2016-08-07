@@ -1,0 +1,669 @@
+﻿<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta http-equiv="Cache-Control: max-age=0, must-revalidate" content="public">
+    <title>LogiBlocks</title>
+</head>
+<body oncontextmenu="return false">
+    <style type="text/css">
+        body {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <canvas id="canvas" width="50" height="50">
+        Canvas not supported with current browser.
+    </canvas>
+    <script>
+        //Setup
+        var WorldW = 125;
+        var WorldH = 100;
+        var blocksize = 10;
+        var debugenabled = true;
+        var vsyncfps = 60;
+        var maxzoom = 200;
+        var minzoom = 0;
+        var zoom = 0;
+        var MenuOpen = true;
+        var simspeeddelay = 5;
+        //Graphics Variables
+        //Variable initialization here
+        var PanelTitleColor = "#303030";
+        var PanelColor = "#1c1c1c";
+        var PanelTextColor = "#d9d9d9";
+        var TextColor = "#ffffff";
+        //Misc Graphics OBJS
+        var autostable_framecount = 0;
+        var autostable_delay = 30;
+        var debugtext = "";
+        var RightClickOpacity = 0.0;
+        var MenuOpacity = 0.0;
+        var fpscount = 0;
+        var debugOpacity = 0.0;
+        var barw = 0;
+        var loopdelay = 15;
+        var framecount = 0;
+        var layer = 0;
+        //Conects for text measuring                  
+        var tcanvas;
+        var tcontext;
+        //Control Vars
+        var rightclicking = false;
+        var leftclicking = false;
+        var mx = 0;
+        var my = 0;
+        var rx = 0;
+        var ry = 0;
+        var lx = 0;
+        var ly = 0;
+        var TransX = 0;
+        var TransY = 0;
+        var World_ForceX = 0;
+        var World_ForceY = 0;
+        var World_ForceDecay = 0.1;
+        var World_Movement_Stop_Range = 0.2;
+        var selectedtype = "Wire"
+        var simspeedtick = 0;
+        //Object vars
+        var FDA = []
+        var TDA = [FDA];
+        var SDA = [TDA];
+        var WorldData = [SDA];
+        //Initialize vars for FPS counter
+        var fps = {
+            startTime: 0,
+            frameNumber: 0,
+            getFPS: function () {
+                this.frameNumber++;
+                var d = new Date().getTime(),
+                    currentTime = (d - this.startTime) / 1000,
+                    result = Math.floor((this.frameNumber / currentTime));
+                if (currentTime > 1) {
+                    this.startTime = new Date().getTime();
+                    this.frameNumber = 0;
+                }
+                return result;
+            }
+        }
+        //Generateworld
+        var WI = 0
+        var HI = 0
+            while (WI < WorldW) {
+                while (HI < WorldH) {
+                    //Fda is all of the data for this cell. format [type, state, statefromx, statefromy]
+                    FDA = [" ", 0, 0, 0]
+                    if (HI == 0) {
+                        TDA[0] = FDA;
+                    } else {
+                        TDA.push(FDA)
+                    }
+                    HI++;
+                }
+                HI = 0;
+                if (WI == 0) {
+                    SDA[0] = TDA;
+                } else {
+                    SDA.push(TDA);
+                }
+                WI++;
+                TDA = [];
+            }
+            WorldData[0] = SDA;
+
+        //Initialize canvas
+        var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        //LoadImages
+        var BG = new Image();
+        var BG_Loaded = false;
+        var BGtx = 0
+        var BGty = 0
+        BG.onload = function () {
+            if (BG_Loaded == false) {
+                BG_Loaded = true;
+            }
+                BGty -= 0.5;
+                BGtx -= 0.5;
+            context.globalAlpha = 1.0;
+            context.fillStyle = "#000000";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            var BGw = BG.width
+            var BGh = BG.height
+            
+            if (BGtx <= -BGw) {
+                BGtx = 0;
+            } else if (BGtx >= BGw) {
+                BGtx = 0;
+            } else if (BGtx > 0) {
+                BGtx = BGtx - BGw
+            }
+            if (BGty <= -BGh) {
+                BGty = 0;
+            } else if (BGty >= BGh) {
+                BGty = 0;
+            } else if (BGty > 0) {
+                BGty = BGty - BGh
+            }
+            var bkupx = BGtx;
+            var bkupy = BGty;
+            while (BGty < canvas.height) {
+                while (BGtx < canvas.width) {
+                    context.drawImage(BG, BGtx, BGty, BGw, BGh);
+                    BGtx = BGtx + BGw;
+                }
+                BGtx = bkupx;
+                BGty = BGty + BGh;
+            }
+            BGtx = bkupx;
+            BGty = bkupy;
+
+        }
+        BG.src = "/Resources/BG.png";
+        //Initialize general functions
+        //Returns time in hh:mm AM/PM Format
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        };
+        //Gets the width of text
+        function getTextWidth(text, font) {
+            tcanvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("tcanvas"));
+            tcontext = canvas.getContext("2d");
+            tcontext.font = font;
+            var metrics = tcontext.measureText(text);
+            return metrics.width;
+        }
+        var now = new Date();
+        var newfontsize
+        var fontdiff
+
+        //Generate world
+
+        //Rendering loop
+        var DrawGraphics = function () {
+            autostable_framecount++;
+            if (BG_Loaded) {
+                BG.onload();
+            }
+            //Start drawing
+            render_world()
+
+            //End drawing
+
+            //Main Menu FX
+            if (MenuOpen) {
+                if (MenuOpacity < 0.60) {
+                    MenuOpacity += 0.01;
+                }
+                if (MenuOpacity > 1.0) { MenuOpacity = 1.0 }
+                context.globalAlpha = MenuOpacity;
+                render_MainMenu((canvas.width / 2) - 200, (canvas.height / 2) - 300, 400, 600);
+            } else {
+                if (MenuOpacity > 0.0) {
+                    MenuOpacity -= 0.01;
+                    if (MenuOpacity < 0.0) { MenuOpacity = 0.0 }
+                    context.globalAlpha = MenuOpacity;
+                    render_MainMenu((canvas.width / 2) - 200, (canvas.height / 2) - 300, 400, 600);
+                }
+            }
+            //RightClick Menu FX
+            if (rightclicking) {
+                if (RightClickOpacity < 0.60) {
+                    RightClickOpacity += 0.04;
+                }
+                if (RightClickOpacity > 1.0) { RightClickOpacity = 1.0 }
+                context.globalAlpha = RightClickOpacity;
+                render_RightClickMenu(rx, ry);
+            } else {
+                if (RightClickOpacity > 0.0) {
+                    RightClickOpacity -= 0.04;
+                    if (RightClickOpacity < 0.0) { RightClickOpacity = 0.0 }
+                    context.globalAlpha = RightClickOpacity;
+                    render_RightClickMenu(rx, ry);
+                }
+            }
+            //Debug Menu FX
+            if (debugenabled) {
+                context.font = "12px Helvetica Neue";
+                debugtext = "Render-Delay(ms):" + loopdelay + "      Render-Delay-Optimizer-Delay(ms):" + autostable_delay
+
+                barw = getTextWidth(debugtext, context.font) + 5
+                if (debugOpacity < 0.60) {
+                    debugOpacity += 0.04;
+                }
+                if (debugOpacity > 1.0) { debugOpacity = 1.0 }
+                context.globalAlpha = debugOpacity;
+                renderdebug(canvas.width - barw - 5, 5);
+            } else {
+                if (debugOpacity > 0.0) {
+                    debugOpacity -= 0.04;
+                    if (debugOpacity < 0.0) { debugOpacity = 0.0 }
+                    context.globalAlpha = debugOpacity;
+                    renderdebug(canvas.width - barw - 5, 5);
+                }
+            }
+
+            fpscount = fps.getFPS();
+            if (autostable_framecount >= autostable_delay) {
+                autostable_framecount = 0;
+                if (fpscount > vsyncfps) {
+                    loopdelay++;
+                    autostable_delay -= 40;
+                } else if (fpscount < vsyncfps - 2) {
+                    loopdelay--;
+                    autostable_delay -= 40;
+                } else {
+                    autostable_delay += 10;
+                };
+                if (autostable_delay < 30) {
+                    autostable_delay = 30;
+                };
+                if (loopdelay < 0) {
+                    loopdelay = 0;
+                };
+            };
+            setTimeout(DrawGraphics, loopdelay);
+        };
+        DrawGraphics()
+        //Render main menu
+        function render_MainMenu(rx, ry, rw, rh) {
+            context.fillStyle = "#000000";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = PanelTitleColor;
+            context.fillRect(rx, ry, rw, 50);
+            context.fillStyle = PanelColor;
+            context.fillRect(rx, ry + 50, rw, rh - 50);
+            context.font = "25px Helvetica Neue";
+            if (context.globalAlpha >= 0.60) { context.globalAlpha = 1.0; }
+            context.fillStyle = "#ffffff";
+            context.fillText("LogiBlocks", rx + (rw / 2) - (getTextWidth("LogiBlocks", context.font) / 2), ry + 33)
+        }
+        //Renders the debug window if debug is on
+        var barmulti = 0;
+        function renderdebug(rx, ry) {
+            context.font = "12px Helvetica Neue";
+            barw = getTextWidth(debugtext, context.font) + 5
+            barmulti = (barw - 10) / vsyncfps
+            context.fillStyle = PanelTitleColor;
+            context.fillRect(rx, ry, barw, 15);
+            context.fillStyle = PanelColor;
+            context.fillRect(rx, ry + 15, barw, 130);
+            //Draw bar for performance
+            if (fpscount > vsyncfps - 2) {
+                context.fillStyle = "#3333cc";
+            } else if (fpscount > (vsyncfps / 1.5)) {
+                context.fillStyle = "#009900";
+            } else if (fpscount > (vsyncfps / 3)) {
+                context.fillStyle = "#cccc00";
+            } else {
+                context.fillStyle = "#990000";
+            }
+            if (fpscount > vsyncfps) {
+                fpscount = vsyncfps;
+            }
+            context.fillRect(rx + 5, ry + 18, fpscount * barmulti, 15);
+            if (context.globalAlpha >= 0.60) { context.globalAlpha = 1.0; }
+            context.font = "12px Helvetica Neue";
+            context.fillStyle = "#ffffff";
+            context.fillText("Debug", rx + (barw / 2), 15)
+            context.fillText("FPS:" + fpscount + "/" + vsyncfps, rx + 10, ry + 30)
+            context.fillText(debugtext, rx + 5, ry + 53);
+            context.fillText("MouseX:" + mx + "  MouseY:" + my + "  ForceX:" + World_ForceX + "  ForceY:" + World_ForceY, rx + 5, ry + 73);
+            context.fillText("X:" + TransX + "  Y:" + TransY, rx + 5, ry + 93);
+            context.fillText("Current Tool:" + selectedtype, rx + 5, ry + 123);
+        }
+
+        function render_RightClickMenu(rx, ry) {
+            var mwidth = 100;
+            var spacer = 20
+            var rw =
+            context.font = "12px Helvetica Neue";
+            context.fillStyle = PanelColor;
+            context.fillRect(rx, ry, mwidth, 45);
+            rx = rx + 5
+            ry = ry + 5
+            context.fillStyle = PanelTitleColor;
+            context.fillRect(rx, ry, mwidth - 10, 15);
+            context.fillStyle = "#ffffff";
+            context.fillText("Debug", rx + ((mwidth - 10) / 2) - (getTextWidth("Debug", context.font) / 2), ry + 12)
+            ry = ry + spacer
+            context.fillStyle = PanelTitleColor;
+            context.fillRect(rx, ry, mwidth - 10, 15);
+            context.fillStyle = "#ffffff";
+            context.fillText("About", rx + ((mwidth - 10) / 2) - (getTextWidth("About", context.font) / 2), ry + 12)
+
+        }
+        function render_world() {
+            if (MenuOpen == false) {
+                if (leftclicking == false) {
+                    if (World_ForceX != 0) {
+                        if (World_ForceX > 0) {
+                            World_ForceX -= World_ForceDecay
+                            TransX += World_ForceX;
+                        } else {
+                            World_ForceX += World_ForceDecay
+                            TransX += World_ForceX;
+                        }
+                        if (World_ForceX > -World_Movement_Stop_Range && World_ForceX < World_Movement_Stop_Range) {
+                            World_ForceX = 0
+                        }
+                    }
+                    if (World_ForceY != 0) {
+                        if (World_ForceY > 0) {
+                            World_ForceY -= World_ForceDecay
+                            TransY += World_ForceY;
+                        } else {
+                            World_ForceY += World_ForceDecay
+                            TransY += World_ForceY;
+                        }
+                        if (World_ForceY > -World_Movement_Stop_Range && World_ForceY < World_Movement_Stop_Range) {
+                            World_ForceY = 0
+                        }
+                    }
+                }
+            }
+            var Ow = blocksize + (zoom / 2)
+            if (Ow <= 0) {
+                Ow = 1;
+            }
+            var AX;
+            var AY;
+            var Os = " ";
+            var TType = " ";
+            var BType = " ";
+            var LType = " ";
+            var RType = " ";
+            var Fromx = 0;
+            var Fromy = 0;
+            var WorkingData = WorldData;
+            var Typecheckindex = 0;
+            var currentlycheckingtype = "";
+            var TPos = 0;
+            var TPos2 = 0;
+            var shouldkillstate = false;
+            if (simspeedtick >= simspeeddelay) {
+                simspeedtick = 0
+                for (Ox in WorldData[layer]) {
+                    AX = Ox;
+                    for (Oy in WorldData[layer][AX]) {
+                        shouldkillstate = false;
+                        AY = Oy;
+                        Ot = WorldData[layer][AX][AY][0]
+                        Os = WorldData[layer][AX][AY][1]
+                        Fromx = WorldData[layer][AX][AY][2]
+                        Fromy = WorldData[layer][AX][AY][3]
+                        TPos = AX - 1
+                        if (TPos > 0) {
+                            TType = WorldData[layer][TPos][AY][0]
+                        } else { TType = " " }
+                        TPos = (AX * 1 + 1)
+                        if (TPos < WorldW) {
+                            BType = WorldData[layer][TPos][AY][0]
+                        } else { BType = " " }
+                        TPos = AY - 1
+                        if (TPos > 0) {
+                            LType = WorldData[layer][AX][TPos][0]
+                        } else { LType = " " }
+                        TPos = (AY * 1 + 1)
+                        if (TPos < WorldH) {
+                            RType = WorldData[layer][AX][TPos][0]
+                        } else { RType = " " }
+
+                        //get top bottom left and right items
+                        if (Ot == "Wire") {
+                            if (Os == 1) {
+                                Typecheckindex = 0;
+                                while (Typecheckindex < 4) {
+                                    TPos = AX;
+                                    TPos2 = AY;
+                                    if (Typecheckindex == 0) {
+                                        currentlycheckingtype = TType
+                                        TPos = AX - 1;
+                                    } else if (Typecheckindex == 1) {
+                                        currentlycheckingtype = BType
+                                        TPos = (AX * 1 + 1);
+                                    } else if (Typecheckindex == 2) {
+                                        TPos2 = AY - 1;
+                                        currentlycheckingtype = LType
+                                    } else if (Typecheckindex == 3) {
+                                        TPos2 = (AY * 1 + 1);
+                                        currentlycheckingtype = RType
+                                    }
+                                    if (currentlycheckingtype == "Wire") {
+                                        if (Fromx != TPos && Fromy != TPos2) {
+                                                WorkingData[layer][TPos][TPos2][1] = 1;
+                                                WorkingData[layer][TPos][TPos2][2] = AX;
+                                                WorkingData[layer][TPos][TPos2][3] = AY;
+                                        } 
+                                        
+                                    }
+                                    
+                                    Typecheckindex++;
+                                }
+                                WorkingData[layer][AX][AY][1] = 0;
+                            }
+                        } else if (Ot == "Battery") {
+                                Typecheckindex = 0;
+                                while (Typecheckindex < 4) {
+                                    TPos = AX
+                                    TPos2 = AY
+                                    if (Typecheckindex == 0) {
+                                        currentlycheckingtype = TType
+                                        TPos = AX - 1;
+                                    } else if (Typecheckindex == 1) {
+                                        currentlycheckingtype = BType
+                                        TPos = (AX * 1 + 1);
+                                    } else if (Typecheckindex == 2) {
+                                        TPos2 = AY - 1;
+                                        currentlycheckingtype = LType
+                                    } else if (Typecheckindex == 3) {
+                                        TPos2 = (AY * 1 + 1);
+                                        currentlycheckingtype = RType
+                                    }
+                                    if (currentlycheckingtype == "Wire") {
+                                        WorkingData[layer][TPos][TPos2][1] = 1;
+                                        WorkingData[layer][TPos][TPos2][2] = AX;
+                                        WorkingData[layer][TPos][TPos2][3] = AY;
+                                    }
+                                    Typecheckindex++;
+                                }
+                            }
+                        }
+                    }
+                WorldData = WorkingData;
+            } else { simspeedtick++; }
+
+
+                for (Ox in WorldData[layer]) {
+                    AX = Ox;
+                    Ox = (Ox * blocksize) + TransX - zoom
+                    if (Ox > -Ow && Ox < canvas.width + Ow) {
+                        for (Oy in WorldData[layer][AX]) {
+                            AY = Oy;
+                            Oy = (Oy * blocksize) + TransY - zoom;
+                            if (Oy > -Ow && Oy < canvas.height + Ow) {
+                                Ot = WorldData[layer][AX][AY][0]
+                                Os = WorldData[layer][AX][AY][1]
+                                if (Ot == "Wire") {
+                                    context.globalAlpha = 1;
+                                    if (Os == 1) {
+                                        context.fillStyle = "#ffcc80";
+                                    } else {
+                                        context.fillStyle = "#c0c0c0";
+                                    }
+
+                                    context.fillRect(Ox, Oy, Ow, Ow)
+                                } else if (Ot == "Battery") {
+                                    var stripesw = (Ow / 3)
+                                    context.fillStyle = "#ffcc00";
+                                    context.fillRect(Ox, Oy, Ow, stripesw)
+                                    context.fillStyle = "#ff9900";
+                                    context.fillRect(Ox, Oy + stripesw, Ow, stripesw)
+                                    context.fillStyle = "#ffcc00";
+                                    context.fillRect(Ox, Oy + (stripesw * 2), Ow, stripesw)
+                                }
+                            }
+                            Oy += TransY - zoom;
+                        }
+                    }
+                }
+                if (debugenabled) {
+                    context.beginPath();
+                    context.lineWidth = "3";
+                    context.strokeStyle = "#0000ff";
+                    context.rect(TransX - zoom, TransY - zoom, (WorldW * blocksize) + (zoom * 2), (WorldH * blocksize) + (zoom * 2))
+                    context.stroke();
+                }
+
+            }
+            //Handles input
+            document.body.onkeydown = function (e) {
+                if (MenuOpen == false) {
+                    if (e.keyCode == 32) {
+                        var Ow = blocksize + (zoom / 2)
+                        var AX;
+                        var AY;
+                        for (Ox in WorldData[layer]) {
+                            AX = Ox;
+                            Ox = (Ox * blocksize) + TransX - zoom
+                            if (Ox > -Ow && Ox < canvas.width + Ow) {
+                                for (Oy in WorldData[layer][AX]) {
+                                    AY = Oy;
+                                    Oy = (Oy * blocksize) + TransY - zoom;
+                                    if (Oy > -Ow && Oy < canvas.height + Ow) {
+                                        if (mx > Ox && mx < Ox + Ow && my > Oy && my < Oy + Ow) {
+                                            WorldData[layer][AX][AY][0] = selectedtype;
+                                            if (selectedtype == "Battery") {
+                                                WorldData[layer][AX][AY][1] = 1;
+                                            } else {
+                                                WorldData[layer][AX][AY][1] = 0;
+                                            }
+                                            WorldData[layer][AX][AY][2] = -1;
+                                            WorldData[layer][AX][AY][3] = -1;
+                                            break;
+                                        }
+                                    }
+                                    Oy += TransY - zoom;
+                                }
+                            }
+                        }
+                    } else if (e.keyCode == 48) {
+                        // 0
+                        selectedtype = "Eraser"
+                    } else if (e.keyCode == 49) {
+                        // 1
+                        selectedtype = "Battery"
+                    } else if (e.keyCode == 50) {
+                        // 2
+                        selectedtype = "Wire"
+                    } else if (e.keyCode == 8) {
+                        MenuOpen = true;
+                    }
+                } else {
+                    if (e.keyCode == 68) {
+                        if (debugenabled) {
+                            debugenabled = false;
+                        } else {
+                            debugenabled = true;
+                        }
+                    } else if (e.keyCode == 13) {
+                        MenuOpen = false;
+                    }
+                }
+            }
+
+            context.canvas.onmousedown = function (e) {
+                if ("which" in e) {  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                    isRightMB = e.which == 3;
+                } else if ("button" in e) {  // IE, Opera
+                    isRightMB = e.button == 2;
+                }
+                if (MenuOpen == false) {
+                    if (isRightMB) {
+                    } else {
+                        rightclicking = false
+                        lx = e.x
+                        ly = e.y
+                        leftclicking = true
+                    }
+                }
+
+            };
+            context.canvas.onmousemove = function (e) {
+                mx = e.x;
+                my = e.y;
+                if (MenuOpen == false) {
+                    if (leftclicking) {
+                        var newx = e.x - lx
+                        var newy = e.y - ly
+                        ly = e.y;
+                        lx = e.x;
+                        World_ForceX = newx;
+                        World_ForceY = newy;
+                        TransX += newx;
+                        TransY += newy;
+                    }
+                }
+            }
+            context.canvas.onmouseup = function (e) {
+
+                var isRightMB = false
+                if ("which" in e) {  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                    isRightMB = e.which == 3;
+                } else if ("button" in e) {  // IE, Opera
+                    isRightMB = e.button == 2;
+                }
+                if (MenuOpen == false) {
+                    if (isRightMB) {
+                        rightclicking = true
+                        rx = e.x;
+                        ry = e.y;
+                    } else {
+
+                    }
+                }
+                leftclicking = false
+            }
+            context.canvas.onmousewheel = function (e) {
+                if (MenuOpen == false) {
+                    if (e.wheelDelta > 0) {
+                        zoom += 5;
+                    } else if (e.wheelDelta < 0) {
+                        zoom -= 5;
+                    }
+                    if (zoom > minzoom) {
+                        zoom = minzoom;
+                    } else if (zoom < -maxzoom) {
+                        zoom = -maxzoom;
+                    }
+                }
+            }
+            window.onresize = function (event) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                Center_X = canvas.width / 2;
+                Center_Y = canvas.height / 2;
+            }
+    </script>
+</body>
+</html>
+
+
+
+
