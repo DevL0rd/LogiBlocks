@@ -118,7 +118,7 @@
                     SDA.push(TDA);
                 }
                 WI++;
-                //Clear array for reloading 
+                //Clear array for reloading
                 TDA = [];
             }
             //save world data
@@ -281,7 +281,7 @@
             if (autostable_framecount >= autostable_delay) {
                 //reset the delay
                 autostable_framecount = 0;
-                
+
                 if (fpscount > vsyncfps) {
                     //if the fps is too fast add delay to render
                     loopdelay++;
@@ -305,7 +305,7 @@
                     loopdelay = 0;
                 };
             };
-            //Delay the next frame 
+            //Delay the next frame
             setTimeout(DrawGraphics, loopdelay);
         };
         DrawGraphics()
@@ -507,10 +507,10 @@
                                     if (currentlycheckingtype == "Wire") {
                                         //if the tile is the same on you got the elctron from last, ignore it so that the energy doesn't move backwards and cause infinite energy.
                                         if (Fromx != TPos && Fromy != TPos2) {
-                                                //store updates to WorkingData array as to update them all in the worlddata after processing.
-                                                WorkingData[layer][TPos][TPos2][1] = 1;
-                                                WorkingData[layer][TPos][TPos2][2] = AX;
-                                                WorkingData[layer][TPos][TPos2][3] = AY;
+                                            //store updates to WorkingData array as to update them all in the worlddata after processing.
+                                            WorkingData[layer][TPos][TPos2][1] = 1;
+                                            WorkingData[layer][TPos][TPos2][2] = AX;
+                                            WorkingData[layer][TPos][TPos2][3] = AY;
                                         }
 
                                     }
@@ -522,46 +522,46 @@
                             }
                         } else if (Ot == "Battery") {
                             //if this tile is a battery, the give energy to the conducting materials around it, like wire!
-                                Typecheckindex = 0;
-                                while (Typecheckindex < 4) {
-                                    TPos = AX
-                                    TPos2 = AY
-                                    //Loop through the surrounding tiles
-                                    if (Typecheckindex == 0) {
-                                        currentlycheckingtype = TType
-                                        TPos = AX - 1;
-                                    } else if (Typecheckindex == 1) {
-                                        currentlycheckingtype = BType
-                                        TPos = (AX * 1 + 1);
-                                    } else if (Typecheckindex == 2) {
-                                        TPos2 = AY - 1;
-                                        currentlycheckingtype = LType
-                                    } else if (Typecheckindex == 3) {
-                                        TPos2 = (AY * 1 + 1);
-                                        currentlycheckingtype = RType
-                                    }
-                                    //if the surroundtile is a wire, give it energy and set the place it got it from as here to prevent it from going backwards
-                                    if (currentlycheckingtype == "Wire") {
-                                        WorkingData[layer][TPos][TPos2][1] = 1;
-                                        WorkingData[layer][TPos][TPos2][2] = AX;
-                                        WorkingData[layer][TPos][TPos2][3] = AY;
-                                    }
-                                    Typecheckindex++;
+                            Typecheckindex = 0;
+                            while (Typecheckindex < 4) {
+                                TPos = AX
+                                TPos2 = AY
+                                //Loop through the surrounding tiles
+                                if (Typecheckindex == 0) {
+                                    currentlycheckingtype = TType
+                                    TPos = AX - 1;
+                                } else if (Typecheckindex == 1) {
+                                    currentlycheckingtype = BType
+                                    TPos = (AX * 1 + 1);
+                                } else if (Typecheckindex == 2) {
+                                    TPos2 = AY - 1;
+                                    currentlycheckingtype = LType
+                                } else if (Typecheckindex == 3) {
+                                    TPos2 = (AY * 1 + 1);
+                                    currentlycheckingtype = RType
                                 }
+                                //if the surroundtile is a wire, give it energy and set the place it got it from as here to prevent it from going backwards
+                                if (currentlycheckingtype == "Wire") {
+                                    WorkingData[layer][TPos][TPos2][1] = 1;
+                                    WorkingData[layer][TPos][TPos2][2] = AX;
+                                    WorkingData[layer][TPos][TPos2][3] = AY;
+                                }
+                                Typecheckindex++;
                             }
                         }
+                    }
                 }
                 //update world data now that it has all been processed.
                 WorldData = WorkingData;
-            } else { simspeedtick++; //tick the simspeed tick to get closer to the next update}
+            } else { simspeedtick++;} //tick the simspeed tick to get closer to the next update
 
                 //loop through the tiles in the currently selected layer and render them
-            for (Ox in WorldData[layer]) {
-                //backup original array x
-                AX = Ox;
-                //set the correct x after scaling
+                for (Ox in WorldData[layer]) {
+                    //backup original array x
+                    AX = Ox;
+                    //set the correct x after scaling
                     Ox = (Ox * blocksize) + TransX - zoom
-                //if within the widht of the screen continue
+                    //if within the widht of the screen continue
                     if (Ox > -Ow && Ox < canvas.width + Ow) {
                         for (Oy in WorldData[layer][AX]) {
                             //backup original array y
@@ -599,8 +599,7 @@
                             }
                         }
                     }
-            }
-                //render the world border if debug is on
+                }
                 if (debugenabled) {
                     context.beginPath();
                     context.lineWidth = "3";
@@ -608,8 +607,8 @@
                     context.rect(TransX - zoom, TransY - zoom, (WorldW * blocksize) + (zoom * 2), (WorldH * blocksize) + (zoom * 2))
                     context.stroke();
                 }
-
             }
+
             //Handles input
             document.body.onkeydown = function (e) {
                 if (MenuOpen == false) {

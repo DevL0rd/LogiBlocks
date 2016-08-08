@@ -13,3 +13,10 @@ S:\Desktop\LogiBlocks\LogiBlocks_Server\bin\Debug\LogiBlocks_Server.exe.config
 S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.exe
 S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.xml
 S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.pdb
+S:\Desktop\LogiBlocks\LogiBlocks_Server\bin\Debug\LogiBlocks_Server.exe
+S:\Desktop\LogiBlocks\LogiBlocks_Server\bin\Debug\LogiBlocks_Server.pdb
+S:\Desktop\LogiBlocks\LogiBlocks_Server\bin\Debug\LogiBlocks_Server.xml
+S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.vbprojResolveAssemblyReference.cache
+S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.ServerForm.resources
+S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.Resources.resources
+S:\Desktop\LogiBlocks\LogiBlocks_Server\obj\Debug\LogiBlocks_Server.vbproj.GenerateResource.Cache
