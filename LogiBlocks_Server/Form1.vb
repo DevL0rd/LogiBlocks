@@ -1,4 +1,4 @@
-﻿'DarkNebula Server
+﻿'LogiBlocks_Server
 'Author Name: Dustin Harris
 'Author Username: dmhzmxn
 'Email:dmhzmxn@gmail.com
