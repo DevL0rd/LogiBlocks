@@ -1,0 +1,28 @@
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.exe.config
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\Interop.VBA.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbproj.ResolveComReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.pdb
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbprojResolveAssemblyReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MYITDashboard.Form1.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MYITDashboard.Resources.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbproj.GenerateResource.Cache
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.pdb
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.exe.config
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.exe
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.pdb
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\bin\Release\MyIT Dashboard Server.xml
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbprojResolveAssemblyReference.cache
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\Interop.VBA.dll
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbproj.ResolveComReference.cache
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MYITDashboard.Form1.resources
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MYITDashboard.Resources.resources
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.vbproj.GenerateResource.Cache
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.exe
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.xml
+C:\Users\duharris\Source\Repos\GSDTV-Node-JS\MyIT_Dashboard_Server\obj\Release\MyIT Dashboard Server.pdb

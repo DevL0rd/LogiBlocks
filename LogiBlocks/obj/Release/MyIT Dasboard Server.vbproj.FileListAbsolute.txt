@@ -1,0 +1,13 @@
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\MyIT Dasboard Server.exe.config
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Interop.VBA.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MyIT Dasboard Server.vbproj.ResolveComReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\MyIT Dasboard Server.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\MyIT Dasboard Server.pdb
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\MyIT Dasboard Server.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MYITDashboard.Form1.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MYITDashboard.Resources.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MyIT Dasboard Server.vbproj.GenerateResource.Cache
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MyIT Dasboard Server.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MyIT Dasboard Server.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\MyIT Dasboard Server.pdb

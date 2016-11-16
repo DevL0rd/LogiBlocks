@@ -1,0 +1,14 @@
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\GSD Operational Dashboard.exe.config
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Interop.VBA.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.vbproj.ResolveComReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\GSD Operational Dashboard.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\GSD Operational Dashboard.pdb
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\bin\Release\GSD Operational Dashboard.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Stats__.Form1.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\Stats__.Resources.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.vbproj.GenerateResource.Cache
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.pdb
+C:\Users\duharris-a\Source\Repos\GSDTV\GSD_Operational_Dashboard\obj\Release\GSD Operational Dashboard.vbprojResolveAssemblyReference.cache

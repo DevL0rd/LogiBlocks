@@ -1,0 +1,15 @@
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\bin\Debug\Stats++.exe.config
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Interop.CVSMsngrXLib.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Interop.VBA.dll
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.vbproj.ResolveComReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\bin\Debug\Stats++.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\bin\Debug\Stats++.pdb
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\bin\Debug\Stats++.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.vbprojResolveAssemblyReference.cache
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats__.Form1.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats__.Resources.resources
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.vbproj.GenerateResource.Cache
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.exe
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.xml
+C:\Users\duharris-a\Source\Repos\GSDTV\Stats++\obj\Debug\Stats++.pdb

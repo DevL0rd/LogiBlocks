@@ -1,0 +1,14 @@
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\bin\Release\LogiBlocks Server.exe.config
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\bin\Release\LogiBlocks Server.exe
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\bin\Release\LogiBlocks Server.pdb
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\bin\Release\LogiBlocks Server.xml
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks_Server.vbprojResolveAssemblyReference.cache
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\Interop.DcmSqlQueryProviderLib.dll
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\Interop.VBA.dll
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks_Server.vbproj.ResolveComReference.cache
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks_Server.Form1.resources
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks_Server.Resources.resources
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks_Server.vbproj.GenerateResource.Cache
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks Server.exe
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks Server.xml
+C:\Users\duharris\Desktop\GSDTV-Node-JS\LogiBlocks\obj\Release\LogiBlocks Server.pdb

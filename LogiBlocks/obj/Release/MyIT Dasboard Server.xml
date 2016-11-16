@@ -1,0 +1,156 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MyIT Dasboard Server
+</name>
+</assembly>
+<members>
+<member name="T:MYITDashboard.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.AvayaDump">
+<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.BG">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.Icon">
+<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.Index">
+<summary>
+  Looks up a localized string similar to 
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=windows-1252&quot;&gt;
+    &lt;title&gt;GSD-Dashboard&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        body {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 0;
+            overflow: hidden;
+        }
+    &lt;/style&gt;
+    &lt;canvas id=&quot;canvas&quot; width=&quot;50&quot; height=&quot;50&quot;&gt;
+        Canvas not supported with current b [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.Logo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.Logo1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.server">
+<summary>
+  Looks up a localized string similar to //Dashboard Server.
+//Author Name: Dustin Harris
+//Work Email:duharris@ebay.com
+//Personal Email:dmhzmxn@gmail.com
+//*********************************
+//
+//
+
+var http = require(&apos;http&apos;);
+var fs = require(&apos;fs&apos;);
+var url = require(&apos;url&apos;);
+var os = require(&apos;os&apos;);
+
+var interfaces = os.networkInterfaces();
+var addresses = [];
+var reportfilesent = false;
+
+//Include DevLord Libs.
+//*********************
+console.log(&quot;Loading Plugins...&quot;)
+var SimpleChat = require(&apos;./SimpleChatServer.js&apos;)
+//Includ [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.SimpleChatServer">
+<summary>
+  Looks up a localized string similar to //SimpleChat Server
+//Author Name: Dustin Harris
+//Email:dmhzmxn@gmail.com
+//*********************************
+//
+//
+var Version = &quot;0.0.1&quot;
+//Connection timeout in milliseconds
+var ConnectionTimeout = 8000
+//Timeout check rate
+var ConnectionTimeoutRate = 1000
+//Include DevLord Libs.
+//*********************
+var StringForm = require(&apos;./StringForm.js&apos;)
+
+//Include 3RD Party Libs.
+//***********************
+
+//Hold connected clients
+var Clients = []
+
+setInterval(function () {
+    TimeoutClien [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="P:MYITDashboard.My.Resources.Resources.StringForm">
+<summary>
+  Looks up a localized string similar to //String Formatting Module
+//Author Name: Dustin Harris
+//Work Email:duharris@ebay.com
+//Personal Email:dmhzmxn@gmail.com
+//*********************************
+//
+//
+
+function RemoveLastLine(str){
+	if(str.lastIndexOf(&quot;\n&quot;)&gt;0) {
+		return str.substring(0, str.lastIndexOf(&quot;\n&quot;));
+	} else {
+		return str;
+	}
+}
+
+function GetTime_AmPm() {
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours &gt;= 12 ? &apos;pm&apos; : &apos;am&apos;;
+  hours = hours % 12;
+  hou [rest of string was truncated]&quot;;.
+</summary>
+</member>
+</members>
+</doc>
